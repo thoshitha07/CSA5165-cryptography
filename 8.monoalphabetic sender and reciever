@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <string.h>
+
+void generateCipherSequence(char keyword[], char cipher[]) {
+    char alphabet[] = "abcdefghijklmnopqrstuvwxyz";
+    int keywordLength = strlen(keyword);
+    int alphabetLength = strlen(alphabet);
+    int index = 0;
+int i,j;
+    for (i = 0; i < keywordLength; i++) {
+        cipher[index++] = keyword[i];
+        for ( j = 0; j < alphabetLength; j++) {
+            if (alphabet[j] == keyword[i]) {
+                alphabet[j] = ' ';
+                break;
+            }
+        }
+    }
+
+    for (i = 0; i < alphabetLength; i++) {
+        if (alphabet[i] != ' ') {
+            cipher[index++] = alphabet[i];
+        }
+    }
+
+    cipher[index] = '\0';
+}
+
+int main() {
+    char keyword[] = "CIPHER";
+    char cipher[27];
+
+    generateCipherSequence(keyword, cipher);
+
+    printf("Keyword: %s\n", keyword);
+    printf("Cipher Sequence: %s\n", cipher);
+
+    return 0;
+}
